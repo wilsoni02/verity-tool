@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Verity Encounter Helper</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+    <h1>Verity Encounter Helper</h1>
+    <p>Equal Distribution &amp; Varied Geometry</p>
+</header>
+
+<nav>
+    <button data-tab="tab1" class="active">All Doubled</button>
+    <button data-tab="tab2">One Doubled 2 Mixed</button>
+    <button data-tab="tab3">All Mixed</button>
+    <button data-tab="tab4">Varied Geometry</button>
+</nav>
+
+<div class="container">
+    <div class="tabs">
+        <!-- Scenario 1: All Doubled -->
+        <section id="tab1" class="tab active">
+            <pre id="scenario1Text" class="instructions"></pre>
+        </section>
+
+        <!-- Scenario 2: One Doubled 2 Mixed -->
+        <section id="tab2" class="tab">
+            <div class="form-group">
+                <label>Double Player:</label>
+                <select id="doubleSelect">
+                    <option>Left</option>
+                    <option>Middle</option>
+                    <option>Right</option>
+                </select>
+            </div>
+            <button id="btn2">Generate</button>
+        </section>
+
+        <!-- Scenario 3: All Mixed -->
+        <section id="tab3" class="tab">
+            <fieldset>
+                <legend>Statue Shapes (L → M → R)</legend>
+                <select id="statLeft"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                <select id="statMid"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                <select id="statRight"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+            </fieldset>
+            <fieldset>
+                <legend>Initial Banks</legend>
+                <div><label>Left:</label>
+                    <select class="bankLeft1"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                    <select class="bankLeft2"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                </div>
+                <div><label>Middle:</label>
+                    <select class="bankMid1"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                    <select class="bankMid2"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                </div>
+                <div><label>Right:</label>
+                    <select class="bankRight1"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                    <select class="bankRight2"><option>Circle</option><option>Square</option><option>Triangle</option></select>
+                </div>
+            </fieldset>
+            <button id="btn3">Generate</button>
+        </section>
+
+        <!-- Scenario 4: Varied Geometry -->
+        <section id="tab4" class="tab">
+            <div class="form-group">
+                <label>Callout (permute CST):</label>
+                <input id="vgInput" placeholder="e.g. CST" maxlength="3" />
+            </div>
+            <button id="btn4">Generate</button>
+        </section>
+    </div>
+
+    <div class="output">
+        <textarea id="output" readonly placeholder="Results will appear here..."></textarea>
+        <button id="clearBtn">Clear</button>
+    </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
