@@ -1,86 +1,80 @@
-Verity Encounter Helper
+# Verity Encounter Helper (Web)
 
-A browser-based web application to guide Guardians through the Verity encounter in Destiny 2’s Salvation’s Edge raid. This tool supports four modes:
+A **web‑based** application to help Guardians navigate the Verity encounter in Destiny&nbsp;2’s *Salvation’s Edge* raid challenges. This tool covers four modes:
 
-Scenario 1: All Doubled – Everyone starts “doubled” and follows a fixed deposit rotation.
+* **Scenario&nbsp;1 – All Doubled** — Everyone starts *doubled* and follows a fixed deposit rotation.  
+* **Scenario&nbsp;2 – One Doubled & Two Mixed** — Choose the doubled player; the app generates give‑and‑take steps for mixed roles.  
+* **Scenario&nbsp;3 – All Mixed** — Computes the shortest symbol‑swap sequence (via Dijkstra’s algorithm) for a fully mixed start.  
+* **Varied Geometry Challenge** — Three‑phase flow (Normal → Perfect → Normal) mapping statues to **Circle / Square / Triangle**.
 
-Scenario 2: One Doubled & Two Mixed – Select the doubled player; generates the give-and-take steps for mixed roles.
+---
 
-Scenario 3: All Mixed – Computes the sequence of symbol swaps for a fully mixed start, ensuring correct totals and no duplicates.
+## 📋 Prerequisites
 
-Varied Geometry Challenge – Custom flow mapping statues to geometric shapes with callout-based consolidation and distribution.
+* **Modern Web Browser** — Chrome, Edge, Firefox, Safari
 
-📋 Prerequisites
+---
 
-Modern Web Browser (Chrome, Firefox, Edge, Safari)
+## 🚀 Getting Started
 
-No additional libraries or servers — runs entirely client-side.
+### Option A – Use the live site *(zero setup)*
 
-🚀 Installation
+1. Visit **<https://wilsoni02.github.io/verity-tool/>**.  
+2. Select a scenario tab and generate your instructions — you’re ready to raid!
 
-Clone the repository
+### Option B – Clone the repository (offline use)
 
-git clone https://github.com/<your-username>/verity-encounter-helper.git
-cd verity-encounter-helper
+```bash
+git clone https://github.com/wilsoni02/verity-tool.git
+cd verity-tool
+```
 
-Open index.html in your browser:
+*Double‑click* `index.html` to launch the tool in your default browser. (No build step or local server required.)
 
-Double-click the file, or
+---
 
-Serve via a simple HTTP server (e.g., npx http-server).
+## 🎮 Usage
 
-🎮 Usage
+| Tab | What to do |
+|-----|------------|
+| **All Doubled** | Loads automatically; review the rotation. |
+| **One Doubled 2 Mixed** | Select the Doubled Player (Left / Middle / Right) → **Generate**. |
+| **All Mixed** | 1⃣ Choose each statue’s shape (L → M → R)  <br> 2⃣ Pick each player’s two starting symbols under **Initial Banks**  <br> 3⃣ Click **Generate**. |
+| **Varied Geometry** | Enter a permutation of **C S T** (e.g. `CST`) → **Generate**. |
 
-Launch
+### Output Controls
 
-Open index.html in your browser.
+* **Clear** — resets the results panel  
+* Copy the plain‑text instructions into Discord, notes, or an overlay
 
-Select a Tab
+---
 
-All Doubled: Auto-loads on page open.
+## 🔍 Features
 
-One Doubled & Two Mixed: Choose Left/Middle/Right, then click Generate.
+* **Four Scenario Generators** — All Doubled, One Doubled 2 Mixed, All Mixed, Varied Geometry  
+* **Input Validation** — prevents duplicate banks and enforces total symbol counts  
+* **Optimal Path Calculation** — Dijkstra’s algorithm for Scenario 3  
+* **Dark‑mode UI** — theming via CSS variables  
 
-All Mixed:
+---
 
-Pick each statue’s symbol (Circle/Square/Triangle).
+## 🛠️ Customization
 
-Set each player’s two starting symbols.
+| What to tweak | File & Location |
+|---------------|----------------|
+| Theme colors (background, accent, etc.) | `style.css` — variables `--bg`, `--fg`, `--accent` |
+| Max bank capacity | `script.js` — `const MAX_BANK_SIZE` |
+| Tab names / layout | `<nav>` buttons in `index.html` |
+| Shape lists & call‑out logic | Helper functions at top of `script.js` |
 
-Click Generate to compute steps (with input validation).
+---
 
-Varied Geometry: Enter a permutation of CST (e.g., TSC), then click Generate.
+## 🤝 Contributing
 
-Output Controls
+Bug reports, feature ideas, and pull requests are welcome! Open an issue or PR on GitHub.
 
-Results display in the right-hand textarea.
+---
 
-Clear Output empties the textarea.
+## 📝 License
 
-🔍 Features
-
-Four Scenario Generators for all major Verity patterns.
-
-Input Validation prevents duplicates and enforces symbol totals.
-
-Dark-Mode Styling with CSS variables.
-
-Zero Dependencies: pure HTML, CSS, and vanilla JavaScript.
-
-Responsive Layout for desktop and mobile browsers.
-
-🛠️ Customization
-
-Theme Colors: adjust CSS variables (--bg, --fg, --accent, etc.) in style.css.
-
-Bank Capacity: modify MAX_BANK_SIZE in script.js.
-
-Tabs & Labels: edit <nav> buttons and <section> IDs in index.html.
-
-🤝 Contributing
-
-Contributions, bug reports, and pull requests are welcome! Please open an issue or PR on GitHub.
-
-📝 License
-
-This project is licensed under the MIT License. See LICENSE for details.
+Released under the **MIT License** — see [`LICENSE`](LICENSE) for details.
