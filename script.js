@@ -232,25 +232,53 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Scenario 3
     document.getElementById('btn3').onclick = () => {
+        const out = document.getElementById('output');
+        const players = ['Left','Middle','Right'];
+
         const shapes = {
-            Left: document.getElementById('statLeft').value,
+            Left:   document.getElementById('statLeft').value,
             Middle: document.getElementById('statMid').value,
-            Right: document.getElementById('statRight').value
+            Right:  document.getElementById('statRight').value
         };
         const banks = {
-            Left: Array.from(document.querySelectorAll('.bankLeft1, .bankLeft2')).map(e => e.value),
-            Middle: Array.from(document.querySelectorAll('.bankMid1, .bankMid2')).map(e => e.value),
-            Right: Array.from(document.querySelectorAll('.bankRight1, .bankRight2')).map(e => e.value)
+            Left:   Array.from(document.querySelectorAll('.bankLeft1, .bankLeft2')).map(e=>e.value),
+            Middle: Array.from(document.querySelectorAll('.bankMid1, .bankMid2')).map(e=>e.value),
+            Right:  Array.from(document.querySelectorAll('.bankRight1, .bankRight2')).map(e=>e.value)
         };
-        for (let p of ['Left','Middle','Right']) {
-            const [a,b] = banks[p];
-            if (a === b) { out.value = `Error: ${p} bank duplicates`; return; }
+
+        // 1) Standard duplicate‐bank check
+        for (let p of players) {
+            if (banks[p][0] === banks[p][1]) {
+                out.value = `Error: ${p} bank has duplicates`;
+                return;
+            }
         }
+        // 2) Total‐counts check
         const all = banks.Left.concat(banks.Middle, banks.Right);
-        if (!['Circle','Square','Triangle'].every(s => all.filter(x => x===s).length===2)) {
+        if (!['Circle','Square','Triangle'].every(s => all.filter(x=>x===s).length===2)) {
             out.value = "Error: total of each shape must equal 2";
             return;
         }
+
+        // ────────────────────────────────────────────────────────────
+        // 3) NEW: Prevent starting with the escape‐combo itself
+        //    If a player’s bank is exactly their two “exit” symbols, abort.
+        for (let p of players) {
+            // the two shapes you *must* escape with are the ones you *don’t* hold
+            const exitShapes = players
+                .filter(s => s !== p)
+                .map(s => shapes[s]);
+            const bank = banks[p].slice().sort();
+            if (bank.length === 2 &&
+                exitShapes.includes(bank[0]) &&
+                exitShapes.includes(bank[1])) {
+                out.value = "Error: cannot start already holding your escape combo – try again (currently in development)";
+                return;
+            }
+        }
+        // ────────────────────────────────────────────────────────────
+
+        // 4) If all checks pass, build the mixed scenario
         out.value = buildAllMixed(shapes, banks);
     };
 
